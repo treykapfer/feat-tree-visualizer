@@ -11,49 +11,55 @@ dot = Digraph(comment='Feat Progression', format='png')
 dot.attr(rankdir='LR')  # Left-to-right layout
 
 # Tier 0 (Base Feats)
-dot.node('Devout Servant', 'Devout Servant')
-dot.node('God\'s Chosen', 'God\'s Chosen')
-dot.node('Masochist', 'Masochist')
-dot.node('Monster Hunter', 'Monster Hunter')
-dot.node('Vanguard', 'Vanguard')
-dot.node('Weapon Initiate', 'Weapon Initiate')
+tier_0_feats = [
+    'Devout Servant', 'God\'s Chosen', 'Masochist', 'Monster Hunter', 'Vanguard', 'Weapon Initiate', 'Arcanist'
+]
+for feat in tier_0_feats:
+    dot.node(feat, feat)
 
 # Tier 1 Feats
-dot.node('Hallowed Keeper', 'Hallowed Keeper')
-dot.node('Inquisitor', 'Inquisitor')
-dot.node('Martyr', 'Martyr')
+tier_1_feats = {
+    'Hallowed Keeper': ['Devout Servant'],
+    'Inquisitor': ['Monster Hunter'],
+    'Martyr': ['Vanguard', 'Masochist'],
+    'Seer of Realms Beyond': ['Arcanist'],
+    'Ward Weaver': ['Devout Servant', 'Arcanist']
+}
+for feat, requirements in tier_1_feats.items():
+    dot.node(feat, feat)
+    for req in requirements:
+        dot.edge(req, feat)
 
 # Tier 2 Feats
-dot.node('Wielder of the Holy Light', 'Wielder of the Holy Light')
-dot.node('Weapons Adept', 'Weapons Adept')
+tier_2_feats = {
+    'Wielder of the Holy Light': ['Hallowed Keeper', 'God\'s Chosen'],
+    'Weapons Adept': ['Weapon Initiate'],
+    'Ancient Protector': ['Ward Weaver', 'God\'s Chosen', 'Hallowed Keeper']
+}
+for feat, requirements in tier_2_feats.items():
+    dot.node(feat, feat)
+    for req in requirements:
+        dot.edge(req, feat)
 
 # Tier 3 Feats
-dot.node('Bane of Monsters', 'Bane of Monsters')
+tier_3_feats = {
+    'Bane of Monsters': ['Weapons Adept', 'Inquisitor', 'Wielder of the Holy Light'],
+    'Realmwalker': ['Ancient Protector', 'Seer of Realms Beyond']
+}
+for feat, requirements in tier_3_feats.items():
+    dot.node(feat, feat)
+    for req in requirements:
+        dot.edge(req, feat)
 
 # Tier 4 Feats
-dot.node('Holy Guardian', 'Holy Guardian')
-
-# Add edges (prerequisites)
-# Tier 0 -> Tier 1
-dot.edge('Devout Servant', 'Hallowed Keeper')
-dot.edge('Monster Hunter', 'Inquisitor')
-dot.edge('Vanguard', 'Martyr')
-dot.edge('Masochist', 'Martyr')
-
-# Tier 1 -> Tier 2
-dot.edge('Hallowed Keeper', 'Wielder of the Holy Light')
-dot.edge('God\'s Chosen', 'Wielder of the Holy Light')
-dot.edge('Weapon Initiate', 'Weapons Adept')
-
-# Tier 2 -> Tier 3
-dot.edge('Weapons Adept', 'Bane of Monsters')
-dot.edge('Inquisitor', 'Bane of Monsters')
-dot.edge('Wielder of the Holy Light', 'Bane of Monsters')
-
-# Tier 3 -> Tier 4
-dot.edge('Bane of Monsters', 'Holy Guardian')
-dot.edge('Martyr', 'Holy Guardian')
-dot.edge('Wielder of the Holy Light', 'Holy Guardian')
+tier_4_feats = {
+    'Holy Guardian': ['Bane of Monsters', 'Martyr', 'Wielder of the Holy Light'],
+    'Pact of the Watcher': ['Wielder of the Holy Light', 'Realmwalker']
+}
+for feat, requirements in tier_4_feats.items():
+    dot.node(feat, feat)
+    for req in requirements:
+        dot.edge(req, feat)
 
 # Save and render the graph into the "exports" folder
 output_path = os.path.join(exports_folder, 'guardian_tree')

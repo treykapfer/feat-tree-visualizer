@@ -48,7 +48,7 @@ for feat, requirements in tier_2_feats.items():
 # Tier 3 Feats
 tier_3_feats = {
     'Primordial Acolyte': ['Blood Chieftain', 'Ancient Protector', 'Dammermancer', 'Grafimancer'],
-    'Beastmaster': ['Ancient Protector', 'Shapechanger'],
+    'Master of the Wild Hunt': ['Ancient Protector', 'Shapechanger'],
     'Realmwalker': ['Seer of Realms Beyond', 'Blood Chieftain', 'Ancient Protector']
 }
 for feat, requirements in tier_3_feats.items():
@@ -59,7 +59,7 @@ for feat, requirements in tier_3_feats.items():
 # Tier 4 (Ultimate Feats)
 tier_4_feats = {
     'Pact of the Damned': ['Primordial Acolyte', 'Realmwalker'],
-    'Primordial Power': ['Primordial Acolyte', 'Beastmaster']
+    'Primordial Power': ['Primordial Acolyte', 'Master of the Wild Hunt']
 }
 for feat, requirements in tier_4_feats.items():
     dot.node(feat, feat)

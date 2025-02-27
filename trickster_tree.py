@@ -13,7 +13,7 @@ dot.attr(rankdir='LR')  # Left-to-right layout
 # Tier 0 (Base Feats)
 tier_0_feats = [
     'Arcanist', 'Unnatural Reflexes', 'Swift', 'Weapon Initiate', 
-    'Seasoned Performer', 'Scoundrel', 'Athlete', 'Energy Fiend'
+    'Seasoned Performer', 'Scoundrel', 'Athlete', 'Energy Fiend', 'Well Studied (Artisan)'
 ]
 for feat in tier_0_feats:
     dot.node(feat, feat)
@@ -26,7 +26,7 @@ tier_1_feats = {
     'Deadly Duelist': ['Weapon Initiate'],
     'Illusionist': ['Arcanist'],
     'Dammerskript Initiate': ['Arcanist'],
-    'Showstopper': ['Seasoned Performer'],
+    'Showstopper': ['Seasoned Performer', 'Well Studied (Artisan)'],
 }
 for feat, requirements in tier_1_feats.items():
     dot.node(feat, feat)
